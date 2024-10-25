@@ -1,0 +1,56 @@
+<mat-dialog-content>
+  <form>
+    <mat-form-field>
+      <mat-label>Employee ID</mat-label>
+      <input matInput [(ngModel)]="employeeId" name="employeeId" disabled>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Gross Salary</mat-label>
+      <input matInput [(ngModel)]="grossSalary" name="grossSalary" type="number">
+    </mat-form-field>
+
+      
+
+    <!--
+    <mat-form-field>
+      <mat-label>conveyance</mat-label>
+      <input matInput [(ngModel)]="conveyance" name="conveyance" type="number">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Medical Allowance</mat-label>
+      <input matInput [(ngModel)]="medicalAllowance" name="medicalAllowance" type="number">
+    </mat-form-field>-->
+
+    <mat-form-field>
+      <mat-label>Special Allowance</mat-label>
+      <input matInput [(ngModel)]="specialAllowance" name="specialAllowance" type="number">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>PF/Esi required ? </mat-label>
+      <input matInput [(ngModel)]="pfFlag" name="pfFlag" type="boolean">
+    </mat-form-field>
+
+    <!-- <mat-form-field>
+      <mat-label>Other Allowance</mat-label>
+      <input matInput [(ngModel)]="otherAllowance" name="otherAllowance" type="number">
+    </mat-form-field> -->
+
+    <!-- <mat-form-field>
+      <mat-label>Professional Tax</mat-label>
+      <input matInput [(ngModel)]="professionalTax" name="professionalTax" type="number">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Income Tax</mat-label>
+      <input matInput [(ngModel)]="incomeTax" name="incomeTax" type="number">
+    </mat-form-field> -->
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSave()">Save</button>
+</mat-dialog-actions>

@@ -1,0 +1,33 @@
+<div class="login-page">
+  <div class="left-section">
+    <div class="content-wrapper">
+     <!-- <img src="./../../../assets/pic/payroll.jpg" alt="Background Image" class="background-image">  -->
+      <div class="text-container">
+        <h1 class="main-text">Welcome to</h1>
+        <h2 class="sub-text">Zubaid Payroll System</h2>
+      </div>
+    </div>
+  </div>
+  <div class="right-section">
+    <div class="login-container">
+      
+      <div *ngIf="logoutReason" class="alert alert-info">
+        You were logged out: {{ logoutReason }}
+      </div>
+
+      <h2 class="title">Sign In</h2>
+      <form (submit)="login()">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input [(ngModel)]="username" name="username" id="username" class="form-control " type="text" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input [(ngModel)]="password" name="password" id="password" class="form-control " type="password" required>
+        </div>
+        <button type="submit" class="btn">Login</button>
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+<h1 mat-dialog-title>{{ data.employeeId ? 'Edit Employee' : 'Add New Employee' }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="employeeForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Employee No</mat-label>
+      <input matInput formControlName="empNo" >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Date of Birth</mat-label>
+      <input matInput formControlName="dateOfBirth" [matDatepicker]="picker1" [value]="data.dateOfBirth | date:'yyyy-MM-dd'" />
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Date of Join</mat-label>
+      <input matInput formControlName="dateOfJoining" [matDatepicker]="picker2" [value]="data.dateOfJoining | date:'yyyy-MM-dd'" />
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Date of Leaving</mat-label>
+      <input matInput formControlName="dateOfLeaving" [matDatepicker]="picker3" [value]="data.dateOfJoining | date:'yyyy-MM-dd'" />
+      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+      <mat-datepicker #picker3></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Phone Number</mat-label>
+      <input matInput formControlName="phoneNumber">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Address</mat-label>
+      <input matInput formControlName="address">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Designation</mat-label>
+      <input matInput formControlName="designation">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Department</mat-label>
+      <mat-select formControlName="department">
+        <!-- Example options, replace with your dynamic options -->
+        <mat-option *ngFor="let dept of departments" [value]="dept.departmentId">{{ dept.departmentId }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- <mat-form-field appearance="fill">
+      <mat-label>Basic Salary</mat-label>
+      <input matInput formControlName="basicSalary" type="number">
+    </mat-form-field> -->
+
+    <mat-form-field appearance="fill">
+      <mat-label>PAN Card</mat-label>
+      <input matInput formControlName="panCard">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Aadhar Card</mat-label>
+      <input matInput formControlName="aadharCard">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Bank Account No.</mat-label>
+      <input matInput formControlName="bankAcNo">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Bank Name</mat-label>
+      <input matInput formControlName="bankName">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>IFSC Code</mat-label>
+      <input matInput formControlName="ifsc">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>uan</mat-label>
+      <input matInput formControlName="uan">
+    </mat-form-field>
+
+    <mat-checkbox formControlName="active" >Active</mat-checkbox>
+    <!-- Additional Fields -->
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button color="primary" (click)="onSave()">Save</button>
+</div>

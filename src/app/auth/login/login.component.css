@@ -1,0 +1,190 @@
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .error-message {
+    color: red;
+  }
+  
+/* General page styling */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f2f5;
+}
+
+/* Login page layout */
+.login-page {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Left section with background image and text */
+.left-section {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: white;
+  text-align: center;
+  position: relative;
+  padding: 20px;
+}
+
+.background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.text-container {
+  position: relative;
+  z-index: 2;
+}
+
+.main-text {
+  /* color:black; */
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  animation: fadeInUp 1.5s ease-out;
+}
+
+.sub-text {
+  /* color:black; */
+  font-size: 24px;
+  font-weight: 300;
+  animation: fadeInUp 2s ease-out;
+}
+
+/* Right section with login form */
+.right-section {
+  
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:lightgoldenrodyellow;
+  padding: 20px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1); /* Inner shadow for a soft edge effect */
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+  background-color: #ffffff; /* Clean background */
+}
+
+.title {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  width: 93%;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px; /* Rounded corners for input */
+  border: 1px solid #ddd; /* Light border */
+  font-size: 16px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Inner shadow for input fields */
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px; /* Rounded corners for button */
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #2980b9;
+}
+
+.error-message {
+  margin-top: 10px;
+  color: red;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  .login-page {
+    flex-direction: column;
+  }
+
+  .left-section {
+   /* background-image: url(./../../../assets/pic/payroll.jpg); */
+    display: none; 
+  }
+
+  .right-section {
+    width: 100%;
+  }
+}
+.left-section {
+  background-color: green;
+  color:white; 
+}
+
+.tb-width{
+  width:9%;
+}

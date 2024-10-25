@@ -1,0 +1,49 @@
+<div class="employee-container">
+  <button mat-raised-button color="primary" (click)="addEmployee()">Add New Employee</button>
+  <br /><br />
+
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let employee of dataSource.data">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Employee No: {{ employee.empNo }} - {{ employee.firstName }} {{ employee.lastName }}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ employee.designation }} | Department: {{ employee.department.departmentName }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="employee-details">
+        <p><strong>Employee Id:</strong> {{ employee.employeeId }}</p>
+        <p><strong>First Name:</strong> {{ employee.firstName }}</p>
+        <p><strong>Last Name:</strong> {{ employee.lastName }}</p>
+        <p><strong>Mobile No:</strong> {{ employee.phoneNumber }}</p>
+        <p><strong>e-mail id:</strong> {{ employee.email }}</p>
+        <p><strong>Designation:</strong> {{ employee.designation }}</p>
+        <p><strong>Department:</strong> {{ employee.department.departmentName }}</p>
+        <p><strong>Date Of Birth:</strong> {{ employee.dateOfBirth }}</p>
+        <p><strong>Address:</strong> {{ employee.address }}</p>
+        <p><strong>Date Of Joining:</strong> {{ employee.dateOfJoining }}</p>
+        <p><strong>Date Of Leaving:</strong> {{ employee.dateOfLeaving }}</p>
+
+        <p><strong>Pan Card No:</strong> {{ employee.panCard }}</p>
+        <p><strong>Aadhar Card No:</strong> {{ employee.aadharCard }}</p>
+
+        <p><strong>Bank AC No:</strong> {{ employee.bankAcNo }}</p>
+        <p><strong>Bank Name:</strong> {{ employee.bankName }}</p>
+        <p><strong>IFSC code:</strong> {{ employee.ifsc }}</p>
+        <p><strong>UAN No:</strong> {{ employee.uan }}</p>
+        <p><strong>Active:</strong> {{ employee.active }}</p>
+        <!-- Action Buttons -->
+        <div class="employee-actions">
+          <button mat-icon-button color="primary" (click)="editEmployee(employee)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteEmployee(employee.employeeId)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

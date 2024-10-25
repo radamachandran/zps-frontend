@@ -1,0 +1,28 @@
+.offer-letter-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .offer-letter-container label {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  .offer-letter-container input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+  }
+  
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+  }
+  
+  .generated-offer-letter {
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  

@@ -1,0 +1,43 @@
+<div class="department-header">
+  <button mat-raised-button color="primary" (click)="openAddDialog()">
+    Add New Department
+  </button>
+</div>
+
+<div class="department-container mat-elevation-z8">
+    <!-- Add New Department Button -->
+  
+    <!-- Department Table -->
+    <table mat-table [dataSource]="departments" class="mat-table">
+  
+      <!-- Department Name Column -->
+      <ng-container matColumnDef="departmentId">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let department"> {{ department.departmentId }} </td>
+      </ng-container>
+  
+      <!-- Department Code Column -->
+      <ng-container matColumnDef="departmentName">
+        <th mat-header-cell *matHeaderCellDef> Code </th>
+        <td mat-cell *matCellDef="let department"> {{ department.departmentName }} </td>
+      </ng-container>
+  
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let department">
+          <button mat-icon-button color="primary" (click)="editDepartment(department)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteDepartment(department.departmentId)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+  
+      <!-- Header and Row Definitions -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  

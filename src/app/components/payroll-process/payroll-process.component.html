@@ -1,0 +1,109 @@
+<div class="payroll-process-container">
+  <div class="form-group">
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker startView="month" (monthSelected)="setMonthAndYear($event, picker)"></mat-datepicker>
+    </mat-form-field>  &nbsp;&nbsp;&nbsp;
+    <button mat-raised-button color="primary" (click)="processPayroll()" class="ml-2">Process Payroll</button>
+  </div>
+
+  <!-- <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker startView="year" (monthSelected)="setMonthAndYear($event, picker)"></mat-datepicker>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="processPayroll()">Process Payroll</button> -->
+  <!-- <button mat-raised-button color="primary" (click)="downloadPayrollData()">Download</button> -->
+
+  <div *ngIf="payrollResults.length > 0" class="result-table">
+    <table mat-table [dataSource]="payrollResults" class="mat-elevation-z8">
+      <!-- Columns definition -->
+      <ng-container matColumnDef="employee_id">
+        <th mat-header-cell *matHeaderCellDef> Employee ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.employeeId}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="employee_name">
+        <th mat-header-cell *matHeaderCellDef> Employee Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.employeeName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="originalBasic">
+        <th mat-header-cell *matHeaderCellDef> Base Salary </th>
+        <td mat-cell *matCellDef="let element"> {{element.originalBasic |number }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="adjustedBasic">
+        <th mat-header-cell *matHeaderCellDef> Derived basic </th>
+        <td mat-cell *matCellDef="let element"> {{element.adjustedBasic |number : '1.0-0' }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="monthlyBasic">
+        <th mat-header-cell *matHeaderCellDef> Derived basic </th>
+        <td mat-cell *matCellDef="let element"> {{element.monthlyBasic |number : '1.0-0' }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="house_rent_allowance">
+        <th mat-header-cell *matHeaderCellDef> HRA </th>
+        <td mat-cell *matCellDef="let element"> {{element.hra |number : '1.0-0' }} </td>
+      </ng-container>
+
+  
+      <ng-container matColumnDef="special_allowance">
+        <th mat-header-cell *matHeaderCellDef> Special Allowance </th>
+        <td mat-cell *matCellDef="let element"> {{element.specialAllowance |number}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="other_allowance">
+        <th mat-header-cell *matHeaderCellDef> Other Allowance </th>
+        <td mat-cell *matCellDef="let element"> {{element.otherAllowance |number }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="pf">
+        <th mat-header-cell *matHeaderCellDef> PF </th>
+        <td mat-cell *matCellDef="let element"> {{element.pf |number}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="pfEmployerContribution367">
+        <th mat-header-cell *matHeaderCellDef> PF-3.67 </th>
+        <td mat-cell *matCellDef="let element"> {{element.pfEmployerContribution367 |number}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="pfEmployerContribution833">
+        <th mat-header-cell *matHeaderCellDef> PF-8.33 </th>
+        <td mat-cell *matCellDef="let element"> {{element.pfEmployerContribution833 |number}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="esiEmployeeContribution75">
+        <th mat-header-cell *matHeaderCellDef> ESI-75 </th>
+        <td mat-cell *matCellDef="let element"> {{element.esiEmployeeContribution75 |number}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="esiEmployeeContribution325">
+        <th mat-header-cell *matHeaderCellDef> ESI-325 </th>
+        <td mat-cell *matCellDef="let element"> {{element.esiEmployeeContribution325 |number}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="net_salary">
+        <th mat-header-cell *matHeaderCellDef> Net Salary </th>
+        <td mat-cell *matCellDef="let element"> {{element.netSalary |number :'1.0-0'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Leave">
+        <th mat-header-cell *matHeaderCellDef> Leave </th>
+        <td mat-cell *matCellDef="let element"> {{element.leaveDays |number}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Sal_Adv">
+        <th mat-header-cell *matHeaderCellDef> Sal Adv </th>
+        <td mat-cell *matCellDef="let element"> {{element.salaryAdvDedAmt |number  }} </td>
+      </ng-container>
+
+      <!-- Header and row definitions -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

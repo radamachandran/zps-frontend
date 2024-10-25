@@ -1,0 +1,41 @@
+<div class="offer-letter-container" style="margin: 20px; padding: 0;">
+  <form [formGroup]="offerLetterForm" (ngSubmit)="generateOfferLetter()">
+    <div>
+      <label for="candidateName">Candidate Name:</label>
+      <input id="candidateName" formControlName="candidateName" type="text" />
+    </div>
+
+    <div>
+      <label for="position">Position:</label>
+      <input id="position" formControlName="position" type="text" />
+    </div>
+
+    <div>
+      <label for="joiningDate">Joining Date:</label>
+      <input id="joiningDate" formControlName="joiningDate" type="date" />
+    </div>
+
+    <!-- <div>
+      <label for="companyName">Company Name:</label>
+      <input id="companyName" formControlName="companyName" type="text" />
+    </div> -->
+
+    <div>
+      <label for="salary">Salary (per annum):</label>
+      <input id="salary" formControlName="salary" type="number" />
+    </div>
+
+    <!-- <div>
+      <label for="hrManagerName">HR Manager Name:</label>
+      <input id="hrManagerName" formControlName="hrManagerName" type="text" />
+    </div> -->
+
+    <button type="submit">Generate Offer Letter</button>
+    <button type="button" (click)="generatePDF()">Generate PDF</button>
+  </form>
+
+  <div *ngIf="generatedOfferLetter" id="offerLetterContent">
+    <!-- <h3>Your Generated Offer Letter</h3> -->
+    <div [innerHTML]="generatedOfferLetter"></div>
+  </div>
+</div>

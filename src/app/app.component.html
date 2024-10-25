@@ -1,0 +1,32 @@
+<!-- 
+<mat-toolbar color="primary">
+  <span>{{ title }}</span>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="logout()" matTooltip="Logout">
+    <mat-icon>logout</mat-icon>
+    
+     <span class="logout-text">Logout</span> 
+  </button>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" opened class="side" ><br><br><br><br><br>
+    <mat-nav-list class="nav-list">
+      <a mat-list-item routerLink="/employees" routerLinkActive="active">Employee Form</a>
+      <a mat-list-item routerLink="/department" routerLinkActive="">Department List</a>
+      <a mat-list-item routerLink="/salary" routerLinkActive="">Employee Salaray</a>
+      <a mat-list-item routerLink="/salaryadv" routerLinkActive="">Salary Adv(Loan)</a>
+      <a mat-list-item routerLink="/monthly_salary_det" routerLinkActive="">Monthly salary Adv det</a>
+      <a mat-list-item routerLink="/leave" routerLinkActive="">Leave</a>
+      <a mat-list-item routerLink="/Process_payroll" routerLinkActive="">payroll Process</a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content >
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->
+
+<router-outlet></router-outlet>

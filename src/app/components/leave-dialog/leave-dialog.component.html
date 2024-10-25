@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>{{ data?.leaveId ? 'Edit Leave' : 'Add New Leave' }}</h2>
+
+<form [formGroup]="leaveForm" (ngSubmit)="onSubmit()">
+  <!-- <mat-form-field appearance="fill">
+    <mat-label>Employee ID</mat-label>
+    <input matInput formControlName="employeeId">
+  </mat-form-field> -->
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Employee ID</mat-label>
+    <mat-select formControlName="employeeId" >
+      <mat-option *ngFor="let employee of employees" [value]="employee.employeeId" >
+        {{employee.employeeId}}  - {{employee.firstName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- <mat-form-field appearance="fill">
+    <mat-label>Month (YYYY-MM)</mat-label>
+    <input matInput formControlName="leaveForTheMonth">
+  </mat-form-field> -->
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Month (MM-YYYY)</mat-label>
+    <mat-select formControlName="leaveForTheMonth">
+      <mat-option *ngFor="let month of months" [value]="month">
+        {{ month }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  
+  <mat-form-field appearance="fill">
+    <mat-label>No. of Days</mat-label>
+    <input matInput formControlName="noOfDays">
+  </mat-form-field>
+
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" type="submit">{{ data?.leaveId ? 'Update' : 'Add' }}</button>
+    <button mat-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</form>
