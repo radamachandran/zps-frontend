@@ -33,6 +33,7 @@ export class LoginComponent {
       },
       (error) => {
         this.errorMessage = 'Invalid username or password';
+        alert(this.errorMessage);
       }
     );
   }

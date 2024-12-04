@@ -35,9 +35,11 @@ private baseUrl = 'http://localhost:8080';
   login(username: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/login`, { username, password });
   }
+ 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');  // Returns true if token exists 
   }
+ 
   logout() {
     const token = localStorage.getItem('token');  // Get the token from localStorage
      

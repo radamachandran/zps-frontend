@@ -44,8 +44,6 @@ date = new FormControl<Date | null>(new Date());
   displayedColumns: string[] = ['employee_id', 'employee_name', 'originalBasic', 'adjustedBasic','monthlyBasic' ,'house_rent_allowance', 'special_allowance', 'other_allowance', 'pf','pfEmployerContribution367','pfEmployerContribution833' ,'esiEmployeeContribution75','esiEmployeeContribution325', 'net_salary', 'Leave', 'Sal_Adv'];
   selectedDate: Date=new Date();
 
-  
-
   constructor(private http: HttpClient, private authService: AuthserviceService, private datePipe: DatePipe) {}
 
   // Remove setMonthAndYear function as it was specific to Moment.js
@@ -76,6 +74,7 @@ date = new FormControl<Date | null>(new Date());
         },
         (error) => {
           console.error('Error processing payroll:', error);
+          alert("Error processing payroll: " + error);
         }
       );
     } else {

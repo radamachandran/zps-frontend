@@ -80,19 +80,41 @@ export class EmployeeEditDialogComponent {
       };
       console.log(JSON.stringify(payload));
        
-        if(this.data?.employeeId)
-        {
+      // Determine whether to create or update
+      const operation = this.data?.employeeId
+      ? this.employeeService.updateEmployee(this.data.employeeId, payload)
+      : this.employeeService.createEmployee(payload);
+
+      // Execute operation with success and error handling
+      operation.subscribe({
+      next: () => {
+        // Close dialog and indicate success
+        this.dialogRef.close(true);
+      },
+      error: (err) => {
+        // Log the error and provide user feedback
+        console.error('Error saving employee data:', err);
+        this.dialogRef.close(false); // Optionally close the dialog
+        // You can also use MatSnackBar or another method to display an error message
+        alert('An error occurred while saving employee data. Please try again later. Error details : '+ err);
+      }
+    });
+
+
+      /* old code without handling the error */
+        // if(this.data?.employeeId)
+        // {
           
-          this.employeeService.updateEmployee(this.data.employeeId,payload).subscribe(() => {
-            this.dialogRef.close(true);
-          });
-        }
-        else
-        {
-          this.employeeService.createEmployee(payload).subscribe(() => {
-            this.dialogRef.close(true);
-          });
-        }
+        //   this.employeeService.updateEmployee(this.data.employeeId,payload).subscribe(() => {
+        //     this.dialogRef.close(true);
+        //   });
+        // }
+        // else
+        // {
+        //   this.employeeService.createEmployee(payload).subscribe(() => {
+        //     this.dialogRef.close(true);
+        //   });
+        // }
 
     }
   }
