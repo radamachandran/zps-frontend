@@ -74,7 +74,7 @@ date = new FormControl<Date | null>(new Date());
         },
         (error) => {
           console.error('Error processing payroll:', error);
-          alert("Error processing payroll: " + error);
+          alert("Error processing payroll: " + error.message);
         }
       );
     } else {

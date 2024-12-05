@@ -15,6 +15,12 @@ export class EmployeeListComponent {
   ngOnInit(): void {
     this.employeeService.getEmployees().subscribe(data => {
       this.employees = data;
+
+        // Sort the employees array by employeeId
+    this.employees.sort((a, b) => {
+      return a.employeeId - b.employeeId;
+    });
+
       // console.log(this.employees);
     });
   }
