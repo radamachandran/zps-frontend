@@ -38,4 +38,26 @@
   .example-month-picker .mat-calendar-arrow {
     display: none;
   }
+  .link-style{
+    text-align: right;
+    margin:2px;
+    color:blue;
+    cursor: pointer;
+  }
+
+  ::ng-deep .month-picker .mat-calendar-period-button {
+    display: none; /* Hides unnecessary period navigation */
+  }
+  .spinner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    color: #3f51b5;
+  }
   
+  a{
+    cursor: pointer;
+    color:blue;
+  }

@@ -48,7 +48,7 @@ export class SalaryadvmstComponent {
   
   loademployees(): void {
     this.employeeService.getEmployees().subscribe(data => {
-      this.employees = data;
+      this.employees = data.filter(x=>x.active===true);
     });
   }
 

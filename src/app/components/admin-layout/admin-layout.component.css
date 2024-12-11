@@ -6,6 +6,8 @@
 .sidenav-container {
     height: 100%;
     /* background-color:gray; */
+  background: rgb(255,255,255);
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(172,161,87,0.9921218487394958) 100%);
     
   }
 
@@ -28,7 +30,15 @@
   
   mat-sidenav {
     width: 250px;
+    /* background: rgb(34,97,195);
+    background: linear-gradient(183deg, rgba(34,97,195,1) 0%, rgba(249,244,206,0.9921218487394958) 100%); */
+      
+    background: rgb(195,34,148);
+    background: linear-gradient(180deg, rgba(195,34,148,1) 0%, rgba(223,199,34,0.9921218487394958) 100%);
+  
   }
+
+
   
   .content {
     padding: 20px;
@@ -37,6 +47,7 @@
   .active {
     font-weight: bold;
     color: #3f51b5;
+
   }
   .spacer {
     flex: 1; /* Creates a flexible space */
@@ -49,3 +60,58 @@
   a{
     color:wheat;
   }
+
+/* Add this to your global styles.scss or component-specific CSS */
+.custom-toolbar {
+  /* background: rgb(71, 34, 195);
+  background: linear-gradient(112deg, rgba(71, 34, 195, 1) 0%, rgba(34, 146, 223, 0.992) 100%); */
+  display: flex;
+  justify-content: space-between;
+  color: white; /* Ensure text contrast */
+
+  background: rgb(195,34,148);
+  background: linear-gradient(112deg, rgba(195,34,148,1) 0%, rgba(223,199,34,0.9921218487394958) 100%);
+
+}
+
+.header-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+
+    .logo {
+      height: 40px;
+      width: 40px;
+    }
+  }
+
+  .project-title {
+    flex-grow: 1;
+    text-align: center;
+    font-weight: bold;
+    
+  }
+
+  .logout-button {
+    font-weight: bold;
+  }
+}
+
+/* In styles.css or the component's CSS file */
+.mat-list-item {
+  color: white; /* This will set the text color of all list items to white */
+}
+
+.mat-nav-list a {
+  color: white; /* This will set the text color of all anchor tags within mat-nav-list to white */
+}
+
+/* In styles.css or the component's CSS file */
+.custom-nav-list a {
+  color: white; /* This will set the text color of all anchor tags within custom-nav-list to white */
+}

@@ -14,6 +14,8 @@ export class EmployeeFormComponent  implements OnInit{
   ELEMENT_DATA:Employee[]|any;
   displayedColumns: string[] = ['empno', 'firstName', 'lastName', 'designation', 'department', 'actions'];
   dataSource = new MatTableDataSource<Employee>();
+  dataSource_active = new MatTableDataSource<Employee>();
+  dataSource_inactive = new MatTableDataSource<Employee>();
 
   constructor(
     private employeeService: EmployeeService,
@@ -22,12 +24,25 @@ export class EmployeeFormComponent  implements OnInit{
 
   ngOnInit(): void {
     this.loadEmployees();
+    
+    
   }
 
   loadEmployees(): void {
     this.employeeService.getEmployees().subscribe((employees: Employee[]) => {
-      this.dataSource.data = employees;
+      // this.dataSource.data = employees.filter(employee => employee.active === true);
+      this.dataSource_active.data=employees.filter(x=>x.active===true);
+      this.dataSource_inactive.data=employees.filter(x=>x.active===false);
+      this.dataSource.data = this.dataSource_active.data;
     });
+  }
+
+  displayActive(){
+    this.dataSource.data = this.dataSource_active.data;
+  }
+
+  displayinActive(){
+    this.dataSource.data = this.dataSource_inactive.data;
   }
 
   addEmployee(): void {
@@ -61,7 +76,8 @@ export class EmployeeFormComponent  implements OnInit{
   }
 
   deleteEmployee(employeeId: number): void {
-    this.employeeService.deleteEmployee(employeeId).subscribe(() => this.loadEmployees());
+    alert("Removing employee from DB is not advisable so make it in-active using edit icon")
+    // this.employeeService.deleteEmployee(employeeId).subscribe(() => this.loadEmployees());
   }
 
 }

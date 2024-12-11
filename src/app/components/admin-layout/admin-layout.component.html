@@ -1,19 +1,34 @@
-
-<mat-toolbar color="primary">
-  <!-- <img src="./../../../assets/pic/logo-removebg-preview.png" alt="" class="pic-size"> -->
+<!-- 
+<mat-toolbar class="custom-toolbar">
     <span>{{ title }}</span>
     <span class="spacer"></span>
     <button mat-icon-button (click)="logout()" matTooltip="Logout">
       <mat-icon>logout</mat-icon>
-      
-      <!-- <span class="logout-text">Logout</span> -->
     </button>
-  </mat-toolbar>
+</mat-toolbar> -->
   
+<mat-toolbar color="primary" class="custom-toolbar">
+  <!-- Logo Section -->
+  <div class="logo-container">
+    <!-- <img src="assets/logo.png" alt="Logo" class="logo" /> -->
+  </div>
+
+  <!-- Project Title Section -->
+   <span class="project-title" style="font-size: 30px;">{{ title }}</span>
+
+  
+
+  <!-- Logout Button Section -->
+  <button mat-icon-button (click)="logout()" matTooltip="Logout">
+    <mat-icon>logout</mat-icon>
+  </button>
+
+</mat-toolbar>
+
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav mode="side" opened class="side" ><br><br><br><br><br>
-      <mat-nav-list class="nav-list">
-         <a mat-list-item routerLink="/employees" routerLinkActive="active">Employee Form</a>
+      <mat-nav-list class="custom-nav-list nav-list ">
+         <a mat-list-item routerLink="/employees" routerLinkActive="active" >Employee Form</a>
         <a mat-list-item routerLink="/department" routerLinkActive="">Department List</a>
         <a mat-list-item routerLink="/salary" routerLinkActive="">Employee Salaray</a>
         <a mat-list-item routerLink="/salaryadv" routerLinkActive="">Salary Adv(Loan)</a>
@@ -21,6 +36,7 @@
         <a mat-list-item routerLink="/leave" routerLinkActive="">Leave</a>
         <a mat-list-item routerLink="/Process_payroll" routerLinkActive=""  *ngIf="isAdmin()">payroll Process</a>
         <a mat-list-item routerLink="/offer_letter" routerLinkActive="">Offer letter gen</a>
+        <a mat-list-item (click)="logout()">Logout</a>
       </mat-nav-list>
     </mat-sidenav>
   

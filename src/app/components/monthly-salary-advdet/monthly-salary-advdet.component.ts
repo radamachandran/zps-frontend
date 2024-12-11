@@ -29,6 +29,8 @@ export class MonthlySalaryAdvdetComponent {
       monthYear: ['this.salaryDeductions?.month_year', Validators.required]
     });
 
+     this.mon_year=this.getCurrentMonthYear();
+    
     // Load initial data
     //this.processSalaryDeductions();
   }
@@ -38,7 +40,10 @@ export class MonthlySalaryAdvdetComponent {
     const now = new Date();
     const month = (now.getMonth() + 1).toString().padStart(2, '0');
     const year = now.getFullYear().toString();
-    return `${month}-${year}`;
+    const lastDayOfPreviousMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+    const month1 = (lastDayOfPreviousMonth.getMonth() + 1).toString().padStart(2, '0');
+    const year1 = lastDayOfPreviousMonth.getFullYear().toString();
+    return `${month1}-${year1}`;
   }
 
 

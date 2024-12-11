@@ -64,9 +64,23 @@ export class SalaryDialogComponent {
       // Update existing salary
       console.log("Salary Id : ",this.data.salary.salaryId);
       
-      this.salaryService.updateSalary(this.data.salary.salaryId, salaryData).subscribe(() => {
-        this.dialogRef.close(true);
+      // this.salaryService.updateSalary(this.data.salary.salaryId, salaryData).subscribe(() => {
+      //   this.dialogRef.close(true);
+      // });
+
+      this.salaryService.updateSalary(this.data.salary.salaryId, salaryData).subscribe({
+        next: (response) => {
+          // Success response
+          alert(response); // Display success message
+          this.dialogRef.close(true);
+        },
+        error: (error) => {
+          // Error response
+          // alert(error.error.message || 'An error occurred while updating salary'); // Display error message
+          this.dialogRef.close(true);
+        }
       });
+
     }
     // else {
     //   // Add new salary

@@ -1,6 +1,6 @@
 <form (ngSubmit)="processSalaryDeductions()">
   <mat-form-field>
-    <input matInput [(ngModel)]="mon_year" name="mon_year" placeholder="MM-YYYY" required [max]="getCurrentMonthYear()">
+    <input matInput [(ngModel)]="mon_year" name="mon_year" placeholder="MM-YYYY" required [max]="getCurrentMonthYear()" disabled>
   </mat-form-field> &nbsp;&nbsp;&nbsp;
   <button mat-raised-button color="primary" type="submit">Process and Fetch Data</button>
 </form>

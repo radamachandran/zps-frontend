@@ -45,19 +45,19 @@ export class OfferComponent {
         { label: "Other Allowances", value: this.currencyPipe.transform(2000, 'INR') || '' }
       ];
     
-      const deductions = [
-        { label: "Provident Fund (PF)", value: this.currencyPipe.transform(formValues.salary * 0.12, 'INR') || '' },
-        { label: "ESI", value: this.currencyPipe.transform(formValues.salary > 15000 ? 0 : formValues.salary * 0.04, 'INR') || '' },
-        { label: "Professional Tax", value: this.currencyPipe.transform(200, 'INR') || '' },
-        { label: "Income Tax", value: this.currencyPipe.transform(formValues.salary * 0.1, 'INR') || '' },
-        { label: "Other Deductions", value: this.currencyPipe.transform(500, 'INR') || '' }
-      ];
+      // const deductions = [
+      //   { label: "Provident Fund (PF)", value: this.currencyPipe.transform(formValues.salary * 0.12, 'INR') || '' },
+      //   { label: "ESI", value: this.currencyPipe.transform(formValues.salary > 15000 ? 0 : formValues.salary * 0.04, 'INR') || '' },
+      //   { label: "Professional Tax", value: this.currencyPipe.transform(200, 'INR') || '' },
+      //   { label: "Income Tax", value: this.currencyPipe.transform(formValues.salary * 0.1, 'INR') || '' },
+      //   { label: "Other Deductions", value: this.currencyPipe.transform(500, 'INR') || '' }
+      // ];
     
       // Calculate totals
-      const totalEarnings = earnings.reduce((acc, item) => acc + parseFloat(item.value.replace(/[^0-9.-]+/g, "")), 0);
-      const totalDeductions = deductions.reduce((acc, item) => acc + parseFloat(item.value.replace(/[^0-9.-]+/g, "")), 0);
-      const netSalary = totalEarnings - totalDeductions;
-      const netSalaryInWords = this.numberToWords(netSalary);
+      // const totalEarnings = earnings.reduce((acc, item) => acc + parseFloat(item.value.replace(/[^0-9.-]+/g, "")), 0);
+      // const totalDeductions = deductions.reduce((acc, item) => acc + parseFloat(item.value.replace(/[^0-9.-]+/g, "")), 0);
+      // const netSalary = totalEarnings - totalDeductions;
+      // const netSalaryInWords = this.numberToWords(netSalary);
     
       // Offer letter with Salary Structure
       this.generatedOfferLetter = `
@@ -83,41 +83,6 @@ export class OfferComponent {
         <br/>
         <p>Best Regards,</p>
         <p><b>${formValues.hrManagerName}</b><br/>HR Manager, <br/>Zubaid Infotech</p>
-    
-        <hr/>
-    
-        <h3 style="text-align: center;">Salary Structure</h3>
-        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-          <tr>
-            <th style="border: 1px solid #000; padding: 8px; text-align: center;">Earnings</th>
-            <th style="border: 1px solid #000; padding: 8px; text-align: center;">Amount</th>
-            <th style="border: 1px solid #000; padding: 8px; text-align: center;">Deductions</th>
-            <th style="border: 1px solid #000; padding: 8px; text-align: center;">Amount</th>
-          </tr>
-          ${earnings.map((item, index) => `
-            <tr>
-              <td style="border: 1px solid #000; padding: 8px;">${item.label}</td>
-              <td style="border: 1px solid #000; padding: 8px; text-align: right;">${item.value}</td>
-              <td style="border: 1px solid #000; padding: 8px;">${deductions[index] ? deductions[index].label : ''}</td>
-              <td style="border: 1px solid #000; padding: 8px; text-align: right;">${deductions[index] ? deductions[index].value : ''}</td>
-            </tr>
-          `).join('')}
-          <tr>
-            <td style="border: 1px solid #000; padding: 8px;"><b>Total Earnings</b></td>
-            <td style="border: 1px solid #000; padding: 8px; text-align: right;"><b>${this.currencyPipe.transform(totalEarnings, 'INR')}</b></td>
-            <td style="border: 1px solid #000; padding: 8px;"><b>Total Deductions</b></td>
-            <td style="border: 1px solid #000; padding: 8px; text-align: right;"><b>${this.currencyPipe.transform(totalDeductions, 'INR')}</b></td>
-          </tr>
-          <tr>
-            <td colspan="2" style="border: 1px solid #000; padding: 8px;"><b>Net Salary</b></td>
-            <td colspan="2" style="border: 1px solid #000; padding: 8px; text-align: right;"><b>${this.currencyPipe.transform(netSalary, 'INR')}</b></td>
-          </tr>
-          <tr>
-            <td colspan="4" style="border: 1px solid #000; padding: 8px; text-align: center;">
-              <b>Net Salary (In Words):</b> ${netSalaryInWords}
-            </td>
-          </tr>
-        </table>
       `;
     
     // const formValues = this.offerLetterForm.value;

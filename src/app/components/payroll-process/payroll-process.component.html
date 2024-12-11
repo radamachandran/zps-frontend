@@ -1,9 +1,10 @@
 <div class="payroll-process-container">
-  <div class="form-group">
-    <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="date">
+
+<div class="form-group">
+    <mat-form-field >
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="date"  >
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker startView="month" (monthSelected)="setMonthAndYear($event, picker)"></mat-datepicker>
+      <mat-datepicker #picker startView="year" (monthSelected)="setMonthAndYear($event, picker)"></mat-datepicker>
     </mat-form-field>  &nbsp;&nbsp;&nbsp;
     <button mat-raised-button color="primary" (click)="processPayroll()" class="ml-2">Process Payroll</button>
   </div>
@@ -13,10 +14,16 @@
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker startView="year" (monthSelected)="setMonthAndYear($event, picker)"></mat-datepicker>
   </mat-form-field>
-  <button mat-raised-button color="primary" (click)="processPayroll()">Process Payroll</button> -->
-  <!-- <button mat-raised-button color="primary" (click)="downloadPayrollData()">Download</button> -->
-
+  <button mat-raised-button color="primary" (click)="processPayroll()">Process Payroll</button>-->
+  
   <div *ngIf="payrollResults.length > 0" class="result-table">
+    <div style="text-align: right;">
+      <a (click)="download()" >Payslip Download & Auto mail</a> 
+    </div>
+    <div *ngIf="isLoading" class="spinner-container">
+      <mat-spinner></mat-spinner>
+      <p>Please wait, the process is running...</p>
+    </div>
     <table mat-table [dataSource]="payrollResults" class="mat-elevation-z8">
       <!-- Columns definition -->
       <ng-container matColumnDef="employee_id">

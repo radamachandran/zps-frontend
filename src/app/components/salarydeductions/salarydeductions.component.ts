@@ -79,10 +79,11 @@ export class SalarydeductionsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log("Result from Db after update:  ",result);
       if (result) {
         this.salaryService.createSalary(result).subscribe(() => {
           this.loadSalaries();
-        });
+         });
       }
     });
   }
@@ -102,11 +103,12 @@ export class SalarydeductionsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.salaryService.updateSalary(salary.salaryId, result).subscribe(() => {
-          this.loadSalaries();
-        });
-      }
+      this.loadSalaries();
+      // if (result) {
+      //   this.salaryService.updateSalary(salary.salaryId, result).subscribe(() => {
+      //     this.loadSalaries();
+      //   });
+      // }
     });
   }
 

@@ -17,6 +17,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatPaginatorModule } from '@angular/material/paginator'; // Add this
 
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -97,6 +98,7 @@ import { OfferComponent } from './components/offer/offer.component'; // Import t
     MatTooltipModule,
     MatSnackBarModule,
     MatExpansionModule, // Include MatExpansionModule
+    MatProgressSpinnerModule
   ],
   providers: [DatePipe, CurrencyPipe,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
