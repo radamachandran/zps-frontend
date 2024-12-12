@@ -31,4 +31,10 @@
   .mat-header-cell, .mat-cell {
     text-align: center;
   }
+
+  a{
+    cursor: pointer;
+    color:blue;
+  }
+  
   

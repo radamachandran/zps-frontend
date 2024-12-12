@@ -8,6 +8,8 @@
       <mat-card-content>
         <br>
        
+
+        
         <form [formGroup]="salaryAdvanceForm" (ngSubmit)="saveSalaryAdvance()" *ngIf="flag" >
           <!-- <mat-form-field appearance="fill" class="full-width">
             <mat-label>Employee ID</mat-label>
@@ -64,11 +66,16 @@
       </mat-card-content>
     </mat-card>
   
+    
     <mat-card class="card">
       <mat-card-header>
-        <mat-card-title>Salary Advances</mat-card-title>
+        <!-- <mat-card-title>Salary Advances</mat-card-title> -->
       </mat-card-header>
+      
       <mat-card-content>
+        <div class="d-flex justify-content-end mb-3">
+          <a style="text-align:right;" (click)="displayActive()">Active</a> | <a style="text-align:right;" (click)="displayinActive()">Completed</a> &nbsp;&nbsp;&nbsp;&nbsp;  
+          </div>    
         <table mat-table [dataSource]="salaryAdvances" class="mat-elevation-z8 full-width">
   
           <ng-container matColumnDef="loan_id">

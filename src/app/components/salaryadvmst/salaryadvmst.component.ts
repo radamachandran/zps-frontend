@@ -11,7 +11,10 @@ import { EmployeeService } from 'src/app/services/employee.service';
 export class SalaryadvmstComponent {
   employeesIds:any[]=[];
   employees:any[]=[];
+  
   salaryAdvances: any[] = [];
+  salaryAdvances_active: any[] = [];
+  salaryAdvances_inactive: any[] = [];
   salaryAdvanceForm: FormGroup;
   isEdit: boolean = false;
   currentId: number | null = null;
@@ -42,12 +45,15 @@ export class SalaryadvmstComponent {
 
   loadSalaryAdvances(): void {
     this.salaryAdvanceService.getAll().subscribe(data => {
-      this.salaryAdvances = data;      
+      this.salaryAdvances_active=data.filter(x=>x.pending_amt>0);
+      this.salaryAdvances_inactive=data.filter(x=>x.pending_amt<=0);
+      this.salaryAdvances = this.salaryAdvances_active;      
     });
   }
   
   loademployees(): void {
     this.employeeService.getEmployees().subscribe(data => {
+
       this.employees = data.filter(x=>x.active===true);
     });
   }
@@ -93,5 +99,15 @@ export class SalaryadvmstComponent {
       this.flag=false;
     else
       this.flag=true;
+  }
+
+  displayActive(){
+    
+    this.salaryAdvances = this.salaryAdvances_active;
+
+  }
+
+  displayinActive(){
+    this.salaryAdvances = this.salaryAdvances_inactive;
   }
 }

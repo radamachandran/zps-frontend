@@ -25,4 +25,8 @@
     border: 1px solid #ccc;
     border-radius: 5px;
   }
+  .error {
+    color: red;
+    font-size: 0.875em;
+  }
   

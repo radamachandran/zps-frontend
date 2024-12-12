@@ -1,60 +1,38 @@
+
 <h1 style="text-align: center;">Offer Letter generation</h1>
 
 <div class="offer-letter-container" style="margin: 20px; padding: 0;">
   <form [formGroup]="offerLetterForm" (ngSubmit)="generateOfferLetter()">
     <div>
       <label for="candidateName">Candidate Name:</label>
-      <input id="candidateName" formControlName="candidateName" type="text" />
+      <input id="candidateName"  formControlName="candidateName" type="text" />
+      <div *ngIf="offerLetterForm.get('candidateName')?.invalid && offerLetterForm.get('candidateName')?.touched"> <span class="error">This field should not be empty.</span> </div>
     </div>
 
     <div>
       <label for="position">Position:</label>
       <input id="position" formControlName="position" type="text" />
+      <div *ngIf="offerLetterForm.get('position')?.invalid && offerLetterForm.get('position')?.touched"> <span class="error">This field should not be empty.</span> </div>
     </div>
 
     <div>
       <label for="joiningDate">Joining Date:</label>
       <input id="joiningDate" formControlName="joiningDate" type="date" />
+      <div *ngIf="offerLetterForm.get('joiningDate')?.invalid && offerLetterForm.get('joiningDate')?.touched"> <span class="error">This field should not be empty.</span> </div>
     </div>
 
-    <!-- <div>
-      <label for="companyName">Company Name:</label>
-      <input id="companyName" formControlName="companyName" type="text" />
-    </div> -->
 
     <div>
       <label for="salary">Salary (per annum):</label>
       <input id="salary" formControlName="salary" type="number" />
+      <div *ngIf="offerLetterForm.get('salary')?.invalid && offerLetterForm.get('salary')?.touched"> <span class="error">This field should not be empty.</span> </div>
     </div>
 
-    <!-- <div>
-      <label for="salary">Base Salary (per Month):</label>
-      <input  id="baseSalary" formControlName="baseSalary" type="number" />
-    </div>
-
-    <div>
-      <label for="splAllow">Special Allowance :</label>
-      <input   id="splAllow" formControlName="splAllow" type="number" />
-    </div>
-    
-<div><label>PF/Esi required? : </label>
-  <label>
-    <input type="radio" value="pfYes"  name="pfFlag"> Yes
-    <input type="radio" value="pfNo"  name="pfFlag"> No
-  </label>
-</div> -->
-
-    <!-- <div>
-      <label for="hrManagerName">HR Manager Name:</label>
-      <input id="hrManagerName" formControlName="hrManagerName" type="text" />
-    </div> -->
-
-    <button type="submit">Generate Offer Letter</button>
-    <button type="button" (click)="generatePDF()">Generate PDF</button>
+    <button type="submit" [disabled]="!offerLetterForm.valid">Generate Offer Letter</button> 
+    <button type="button" (click)="generatePDF()" [disabled]="pdf_flag">Generate PDF</button>
   </form>
 
   <div *ngIf="generatedOfferLetter" id="offerLetterContent">
-    <!-- <h3>Your Generated Offer Letter</h3> -->
     <div [innerHTML]="generatedOfferLetter"></div>
   </div>
 </div>
