@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Employee,Department } from '../../models/employee';
 import { DeparmentService } from 'src/app/services/deparment.service';
@@ -26,31 +26,31 @@ export class EmployeeEditDialogComponent {
     private datePipe: DatePipe,
     @Inject(MAT_DIALOG_DATA) public data: Employee
   ) {
+   
   }
 
   ngOnInit(): void {
     this.employeeForm = this.fb.group({
-      employeeId:[ this.data?.employeeId],
-      //empNo: [{ value: this.data?.empNo || '',disabled:true } ],
-      empNo: [{ value: this.data?.empNo || '', disabled: this.data?.empNo }],
-      firstName: [this.data?.firstName || ''],
+      employeeId: [this.data?.employeeId],
+      empNo: [{ value: this.data?.empNo || '', disabled: this.data?.empNo }, Validators.required],
+      firstName: [this.data?.firstName || '', Validators.required],
       lastName: [this.data?.lastName || ''],
-      email: [this.data?.email || ''],
-      dateOfBirth: [this.data?.dateOfBirth || ''],
-      phoneNumber: [this.data?.phoneNumber || ''],
-      address: [this.data?.address || ''],
-      designation: [this.data?.designation || ''],
-      department: [this.data?.department?.departmentId || null],
-      panCard: [this.data?.panCard || ''],
-      aadharCard: [this.data?.aadharCard || ''],
-      bankAcNo: [this.data?.bankAcNo || ''],
-      bankName: [this.data?.bankName || ''],
-      ifsc: [this.data?.ifsc || ''],
+      email: [this.data?.email || '', [Validators.required, Validators.email]],
+      phoneNumber: [this.data?.phoneNumber || '', [Validators.required, Validators.pattern(/^[6-9]\d{9}$/)]], 
+      dateOfBirth: [this.data?.dateOfBirth || '', Validators.required],
+      address: [this.data?.address || '', Validators.required],
+      designation: [this.data?.designation || '', Validators.required],
+      department: [this.data?.department?.departmentId || null, Validators.required],
+      panCard: [this.data?.panCard || '', [Validators.pattern(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/)]],
+      aadharCard: [this.data?.aadharCard || '', [Validators.required]], // Fixed here
+      bankAcNo: [this.data?.bankAcNo || '', [Validators.required, Validators.pattern(/^\d{9,18}$/)]], // Fixed here
+      bankName: [this.data?.bankName || '', Validators.required],
+      ifsc: [this.data?.ifsc || '', [Validators.required]], // Fixed here
       active: [this.data?.active || true],
-      dateOfJoining:[this.data?.dateOfJoining || ''],
-      dateOfLeaving:[{ value: this.data?.dateOfLeaving || '', disabled: !this.data.dateOfJoining }],
-      uan:[this.data?.uan || ''],
-      createdOn:[this.dataUp || '' ]
+      dateOfJoining: [this.data?.dateOfJoining || '', Validators.required],
+      dateOfLeaving: [{ value: this.data?.dateOfLeaving || '', disabled: !this.data.dateOfJoining }],
+      uan: [this.data?.uan || '', Validators.pattern(/^\d{12}$/)],
+      createdOn: [this.dataUp || '']
       // Additional fields as necessary
     });
   
@@ -69,7 +69,12 @@ export class EmployeeEditDialogComponent {
     if (this.employeeForm.valid){
       const formValues = this.employeeForm.getRawValue();
       const selectedDepartmentId = this.employeeForm.get('department').value;
-      this.sel =this.departments.find(dept => dept.departmentId === selectedDepartmentId);
+      console.log("Department id : "+selectedDepartmentId);
+      console.log("empl id : "+this.data?.employeeId);
+      if (!this.data?.employeeId)
+        this.sel =this.departments.find(dept => dept.departmentName === selectedDepartmentId);
+      else
+        this.sel =this.departments.find(dept => dept.departmentId === selectedDepartmentId);
       const payload = {
           ...formValues,
           department: {departmentId: this.sel.departmentId},  // Wrap the departmentId in an object
@@ -117,9 +122,38 @@ export class EmployeeEditDialogComponent {
         // }
 
     }
+    else{
+//      alert("Please check the form, there is some discrepency!!!");
+        this.showValidationErrors(); // Call the method to highlight errors
+    }
   }
 
   onCancel(): void {
     this.dialogRef.close();
   }
+
+  showValidationErrors(): void {
+    const invalidFields: string[] = [];
+  
+    // Loop through form controls to find invalid fields
+    Object.keys(this.employeeForm.controls).forEach((field) => {
+      const control = this.employeeForm.get(field);
+      if (control?.invalid) {
+        invalidFields.push(field); // Store the invalid field name
+      }
+    });
+  
+    if (invalidFields.length > 0) {
+      // Show alert with invalid fields
+      alert(`Please correct the following fields:\n${invalidFields.join(', ')}`);
+  
+      // Scroll to the first invalid field (if in a dialog, ensure the form is scrollable)
+      const firstInvalidControl = document.querySelector(`[formcontrolname="${invalidFields[0]}"]`);
+      if (firstInvalidControl) {
+        firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        (firstInvalidControl as HTMLElement).focus();
+      }
+    }
+  }
+  
 }

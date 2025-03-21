@@ -83,10 +83,20 @@
             <td mat-cell *matCellDef="let element"> {{element.loan_id}} </td>
           </ng-container>
   
-          <ng-container matColumnDef="employee_id">
+          <ng-container matColumnDef="empNo">
+            <th mat-header-cell *matHeaderCellDef> Emp No</th>
+            <td mat-cell *matCellDef="let element"> {{ getEmpNo(element.employee_id) }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="employee">
+            <th mat-header-cell *matHeaderCellDef> Employee </th>
+            <td mat-cell *matCellDef="let element"> {{ getEmployeeName(element.employee_id) }} </td>
+          </ng-container>
+
+          <!-- <ng-container matColumnDef="employee_id">
             <th mat-header-cell *matHeaderCellDef> Employee ID </th>
             <td mat-cell *matCellDef="let element"> {{element.employee_id}} </td>
-          </ng-container>
+          </ng-container> -->
   
 
           <ng-container matColumnDef="loan_amt">
@@ -126,8 +136,8 @@
             </td>
           </ng-container>
   
-          <tr mat-header-row *matHeaderRowDef="['loan_id', 'employee_id', 'loan_amt', 'date_of_issue', 'paid_amt', 'pending_amt', 'purpose', 'actions']"></tr>
-          <tr mat-row *matRowDef="let row; columns: ['loan_id', 'employee_id', 'loan_amt', 'date_of_issue', 'paid_amt', 'pending_amt', 'purpose', 'actions'];"></tr>
+          <tr mat-header-row *matHeaderRowDef="['loan_id','empNo', 'employee', 'loan_amt', 'date_of_issue', 'paid_amt', 'pending_amt', 'purpose', 'actions']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['loan_id', 'empNo','employee', 'loan_amt', 'date_of_issue', 'paid_amt', 'pending_amt', 'purpose', 'actions'];"></tr>
         </table>
       </mat-card-content>
     </mat-card>

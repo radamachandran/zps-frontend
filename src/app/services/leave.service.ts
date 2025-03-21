@@ -16,6 +16,7 @@ export class LeaveService {
   }
 
   addLeave(leave: any): Observable<any> {
+    console.log("In service",leave);
     return this.http.post<any>(this.apiUrl+ "/add", leave);
   }
 

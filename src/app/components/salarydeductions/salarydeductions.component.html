@@ -1,11 +1,10 @@
 <h2>&nbsp;&nbsp;&nbsp;&nbsp;Salary Management</h2>
 <button mat-raised-button color="primary" (click)="openAddSalaryDialog()" disabled="true" *ngIf="false">Add New Salary</button>
 
-<div class="container">
- 
+<div>
 
- <mat-paginator [pageSizeOptions]="[10, 20,50]" showFirstLastButtons></mat-paginator>
-
+  
+  <mat-paginator [pageSizeOptions]="[10, 20,50]" showFirstLastButtons></mat-paginator>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <!-- Columns Definitions -->
     <ng-container matColumnDef="employeeId">

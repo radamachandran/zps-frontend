@@ -5,6 +5,7 @@ import { LeaveService } from 'src/app/services/leave.service';
 import { LeaveDialogComponent } from '../leave-dialog/leave-dialog.component';
 import { FormControl } from '@angular/forms';
 import * as moment from 'moment';
+import { EmployeeService } from 'src/app/services/employee.service';
 
 @Component({
   selector: 'app-leave',
@@ -14,14 +15,14 @@ import * as moment from 'moment';
 export class LeaveComponent implements OnInit {
   months: string[] = [];
   leaveForTheMonthControl = new FormControl('');
-  displayedColumns: string[] = ['leaveId', 'employeeId', 'leaveForTheMonth', 'noOfDays', 'actions'];
+  displayedColumns: string[] = ['leaveId', 'employeeId','employeeName', 'leaveForTheMonth', 'noOfDays', 'actions'];
   leaves:Leave[] = [];
   flag = true;
   highlightedRow: Leave|null=null;
+  employees:any[]=[];
 
 
-
-  constructor(private leaveService: LeaveService, public dialog: MatDialog) {}
+  constructor(private leaveService: LeaveService,private employeeService: EmployeeService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     const currentMonth = moment().format('MM-YYYY');
@@ -29,21 +30,51 @@ export class LeaveComponent implements OnInit {
     
     this.months = [currentMonth, previousMonth];
     this.loadLeaves();
+    this.loademployees();
   }
 
   loadLeaves() {
-    this.leaveService.getLeaves().subscribe((data: any) => {
-      this.leaves = data;
+    this.leaveService.getLeaves().subscribe({
+      next: (data: any) => {
+        this.leaves = data.map(leave => {
+          const employee = this.employees.find(emp => emp.employeeId === leave.employeeId);
+          return {
+            ...leave,
+            employeeName: employee ? employee.firstName + ' ' + employee.lastName : 'Unknown'
+          };
+        });
+      },
+      error: (err) => {
+        console.error('Error fetching leaves:', err);
+        alert('Failed to load leaves. Please try again later.');
+      }
     });
   }
-
+  
+  loademployees(): void {
+    this.employeeService.getEmployees().subscribe({
+      next: (data) => {
+        this.employees = data;
+        this.loadLeaves();  // Ensure leaves load after employees
+      },
+      error: (err) => {
+        console.error('Error fetching employees:', err);
+        alert('Failed to load employee data.');
+      }
+    });
+  }
   
   deleteLeave(id: number) {
-    this.leaveService.deleteLeave(id).subscribe(() => {
-      this.loadLeaves();
+    this.leaveService.deleteLeave(id).subscribe({
+      next: () => {
+        this.loadLeaves();
+      },
+      error: (err) => {
+        console.error('Error deleting leave:', err);
+        alert('Failed to delete leave. Please try again.');
+      }
     });
   }
-
   // leave.component.ts
 openLeaveForm() {
   const dialogRef = this.dialog.open(LeaveDialogComponent, {
@@ -81,8 +112,6 @@ editLeave(leave: any) {
 }
 
 highlightRow(row: { employeeId: number, leaveForTheMonth: string }) {
-  console.log("High1 : " ,row.employeeId);
-  console.log("High2 : " ,row.leaveForTheMonth);
   
   this.highlightedRow = this.leaves.find(leave => 
     leave.employeeId === row.employeeId && leave.leaveForTheMonth === row.leaveForTheMonth

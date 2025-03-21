@@ -48,6 +48,8 @@ import { AdminLayoutComponent } from './components/admin-layout/admin-layout.com
 import { MatExpansionModule } from '@angular/material/expansion';
 import { OfferComponent } from './components/offer/offer.component'; // Import the MatExpansionModule
 
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
 
 
 @NgModule({
@@ -98,7 +100,8 @@ import { OfferComponent } from './components/offer/offer.component'; // Import t
     MatTooltipModule,
     MatSnackBarModule,
     MatExpansionModule, // Include MatExpansionModule
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatAutocompleteModule
   ],
   providers: [DatePipe, CurrencyPipe,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

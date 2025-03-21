@@ -111,7 +111,8 @@ date = new FormControl<Date | null>(new Date());
    // return `${day}-${month}-${year}`;
     return `${month}-${year}`;
   }
-   downloadPayrollData() {
+ 
+  downloadPayrollData() {
     if (this.date.value) {
       const now = new Date();
       const day = String(now.getDate()).padStart(2, '0');
@@ -123,31 +124,68 @@ date = new FormControl<Date | null>(new Date());
     
       // Construct the filename
       const filename1 = `${day}${month}${year}_${hours}${minutes}${seconds}`;
-
-
-
       const formattedDate = this.formatDate(this.date.value);
       
       this.http.get('http://localhost:8080/api/downloadPayroll', {
-        params: { monthYear: formattedDate },
-        responseType: 'blob',
-        observe: 'response'
-      }).pipe(
-        tap((response: HttpResponse<Blob>) => {
-          const blob = new Blob([response.body!], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-          const filename = `payroll_${filename1}.xlsx`;
-          saveAs(blob, filename);
-        }),
-        catchError(error => {
-          console.error('Error downloading payroll data:', error);
-          return throwError(() => new Error('Failed to download payroll data'));
-        })
-      ).subscribe();
+	  params: { monthYear: formattedDate },
+	  responseType: 'blob',
+	  observe: 'response',
+	}).subscribe({
+	  next: (response: HttpResponse<Blob>) => {
+		const blob = new Blob([response.body!], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+		const filename = `payroll_${filename1}.xlsx`;
+		saveAs(blob, filename);
+		console.log('Payroll data downloaded successfully.');
+	  },
+	  error: (error) => {
+		console.error('Error downloading payroll data:', error.error.message || error.message);
+	  }
+	});
     } else {
       console.error('No month selected');
     }
   }
-  download() {
+
+
+
+  //  downloadPayrollData() {
+  //   if (this.date.value) {
+  //     const now = new Date();
+  //     const day = String(now.getDate()).padStart(2, '0');
+  //     const month = now.toLocaleString('default', { month: 'short' }).toUpperCase();
+  //     const year = now.getFullYear();
+  //     const hours = String(now.getHours()).padStart(2, '0');
+  //     const minutes = String(now.getMinutes()).padStart(2, '0');
+  //     const seconds = String(now.getSeconds()).padStart(2, '0');
+    
+  //     // Construct the filename
+  //     const filename1 = `${day}${month}${year}_${hours}${minutes}${seconds}`;
+
+
+
+  //     const formattedDate = this.formatDate(this.date.value);
+      
+  //     this.http.get('http://localhost:8080/api/downloadPayroll', {
+  //       params: { monthYear: formattedDate },
+  //       responseType: 'blob',
+  //       observe: 'response'
+  //     }).pipe(
+  //       tap((response: HttpResponse<Blob>) => {
+  //         const blob = new Blob([response.body!], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  //         const filename = `payroll_${filename1}.xlsx`;
+  //         saveAs(blob, filename);
+  //       }),
+  //       catchError(error => {
+  //         console.error('Error downloading payroll data:', error.error.message);
+  //         return throwError(() => new Error('Failed to download payroll data'));
+  //       })
+  //     ).subscribe();
+  //   } else {
+  //     console.error('No month selected');
+  //   }
+  // }
+ 
+download() {
     if (this.date.value) {
       const formattedDate = this.formatDate(this.date.value);
     this.isLoading = true; // Show spinner

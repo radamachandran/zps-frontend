@@ -2,9 +2,9 @@
     <h2>Leave Management</h2>
   
     <mat-card>
-      <mat-card-title>
-      <button mat-raised-button color="primary" (click)="openLeaveForm()">Add New Leave</button> </mat-card-title>
-  <br><br>
+      <mat-card-title><br>
+      <button mat-raised-button color="primary" style="margin: 10px;" (click)="openLeaveForm()">Add New Leave</button> </mat-card-title>
+  <br>
       <!-- Leave List Table -->
       <table mat-table [dataSource]="leaves" class="mat-elevation-z8" matSort>
   
@@ -19,7 +19,13 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee ID</th>
           <td mat-cell *matCellDef="let leave" [class.highlighted]="getRowClass(leave)">{{ leave.employeeId }}</td>
         </ng-container>
-  
+
+         <!-- Employee Name Column -->
+        <ng-container matColumnDef="employeeName">
+          <th mat-header-cell *matHeaderCellDef> Employee Name </th>
+          <td mat-cell *matCellDef="let leave"> {{ leave.employeeName }} </td>
+        </ng-container>
+
         <!-- Leave for the Month Column -->
         <ng-container matColumnDef="leaveForTheMonth">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Month</th>

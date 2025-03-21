@@ -5,7 +5,7 @@
   <div class="container" style="text-align: right;"><a (click)="displayActive()">active</a> | <a (click)="displayinActive()">Inactive</a> &nbsp;&nbsp;&nbsp;&nbsp;  </div>
   <mat-accordion>
     <mat-expansion-panel *ngFor="let employee of dataSource.data">
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header >
         <mat-panel-title>
           Employee No: {{ employee.empNo }} - {{ employee.firstName }} {{ employee.lastName }}
         </mat-panel-title>

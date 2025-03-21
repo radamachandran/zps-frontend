@@ -32,6 +32,7 @@ export class SalarydeductionsComponent implements OnInit {
   selectedSalary: any;
   dataSource = new MatTableDataSource<any>();
 
+ 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
@@ -44,6 +45,7 @@ export class SalarydeductionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadSalaries();
+    
   }
 
   // Initialize the salary form
@@ -70,6 +72,8 @@ export class SalarydeductionsComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     });
   }
+
+  
 
   // Open dialog to add a new salary entry
   openAddSalaryDialog(): void {
@@ -136,4 +140,7 @@ export class SalarydeductionsComponent implements OnInit {
       this.loadSalaries();
     });
   }
+ 
+
+
 }

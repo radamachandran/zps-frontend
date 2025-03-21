@@ -53,7 +53,6 @@ export class SalaryadvmstComponent {
   
   loademployees(): void {
     this.employeeService.getEmployees().subscribe(data => {
-
       this.employees = data.filter(x=>x.active===true);
     });
   }
@@ -110,4 +109,15 @@ export class SalaryadvmstComponent {
   displayinActive(){
     this.salaryAdvances = this.salaryAdvances_inactive;
   }
+
+  getEmployeeName(employeeId: number): string {
+    const employee = this.employees.find(emp => emp.employeeId === employeeId);
+    return employee ? `${employee.firstName} ${employee.lastName}` : 'N/A';
+  }
+  
+   getEmpNo(employeeId: number): string {
+    const employee = this.employees.find(emp => emp.employeeId === employeeId);
+    return employee ? `${employee.empNo} ` : 'N/A';
+  }
+
 }

@@ -1,24 +1,36 @@
+
 <h2 mat-dialog-title>{{ data?.leaveId ? 'Edit Leave' : 'Add New Leave' }}</h2>
 
 <form [formGroup]="leaveForm" (ngSubmit)="onSubmit()">
-  <!-- <mat-form-field appearance="fill">
-    <mat-label>Employee ID</mat-label>
-    <input matInput formControlName="employeeId">
-  </mat-form-field> -->
 
   <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Employee No</mat-label>
+    
+    <!-- Input Field with MatAutocomplete -->
+    <input type="text" 
+           matInput 
+           [formControl]="employeeFilterCtrl" 
+           [matAutocomplete]="auto"
+           placeholder=""
+           >
+    
+    <!-- MatAutocomplete Dropdown -->
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectEmployee($event)">
+      <mat-option *ngFor="let employee of (filteredEmployees | async)" [value]="employee.employeeId ? employee.employeeId : leaveForm.value.get('employeeId')?.value">
+        {{employee.employeeId}} - {{employee.firstName}} - {{employee.lastName}} - {{employee.empNo}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  
+  <!-- <mat-form-field appearance="fill" class="full-width">
     <mat-label>Employee ID</mat-label>
     <mat-select formControlName="employeeId" >
       <mat-option *ngFor="let employee of employees" [value]="employee.employeeId" >
-        {{employee.employeeId}}  - {{employee.firstName}}
+        {{employee.empNo}}  - {{employee.firstName}} - {{employee.lastName}}
       </mat-option>
     </mat-select>
-  </mat-form-field>
-
-  <!-- <mat-form-field appearance="fill">
-    <mat-label>Month (YYYY-MM)</mat-label>
-    <input matInput formControlName="leaveForTheMonth">
   </mat-form-field> -->
+
 
   <mat-form-field appearance="fill" class="full-width">
     <mat-label>Month (MM-YYYY)</mat-label>
@@ -28,9 +40,8 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-
   
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="fill" class="full-width">
     <mat-label>No. of Days</mat-label>
     <input matInput formControlName="noOfDays">
   </mat-form-field>

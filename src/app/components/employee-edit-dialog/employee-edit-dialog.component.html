@@ -61,7 +61,7 @@
       <mat-label>Department</mat-label>
       <mat-select formControlName="department">
         <!-- Example options, replace with your dynamic options -->
-        <mat-option *ngFor="let dept of departments" [value]="dept.departmentId">{{ dept.departmentId }}</mat-option>
+        <mat-option *ngFor="let dept of departments" [value]="dept.departmentName">{{ dept.departmentName }}</mat-option>
       </mat-select>
     </mat-form-field>
 
