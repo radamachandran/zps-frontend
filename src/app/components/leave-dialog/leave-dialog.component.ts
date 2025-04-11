@@ -92,48 +92,91 @@
       if (this.leaveForm.valid) {
         const employeeId = this.leaveForm.value.employeeId;
         this.leaveForm.value.leaveForTheMonth = this.previousMonth;
+        this.leaveForm.value.leaveId=this.data?.leave?.leaveId;
     
         const existingLeave = this.data.leaves.find(
           (leave: any) => leave.employeeId === employeeId && leave.leaveForTheMonth === this.previousMonth
         );
-    
-        if (existingLeave) {
-          this.snackBar.open('A leave record for this employee and month already exists. Please edit the existing record.', 'Close', {
-            duration: 5000
+
+
+        if (this.data?.leave?.leaveId) {
+          // Update Leave
+          this.leaveForm.value.leaveId=this.data?.leave?.leaveId;
+          this.leaveForm.value.leaveForTheMonth = this.previousMonth;
+          this.leaveForm.value.employeeId =this.leaveForm.value.employeeId;
+          this.leaveForm.value.noOfDays=this.leaveForm.value.noOfDays;
+
+          this.leaveService.updateLeave(this.leaveForm.value).pipe(
+            catchError(error => {
+              console.error('Error updating leave:', error);
+              this.snackBar.open('Failed to update leave. Try again.', 'Close',  { duration: 5000 });
+              return throwError(error);
+            })
+          ).subscribe(() => {
+            this.dialogRef.close(true);
           });
-          this.dialogRef.close(true);
         } else {
+          
+      if (existingLeave ) {
+        this.snackBar.open('A leave record for this employee and month already exists. Please edit the existing record.', 'Close', {
+        duration: 5000
+        });
+        this.dialogRef.close(true);
+      }
 
-          if (this.data?.leave?.leaveId) {
-            // Update Leave
-            this.leaveForm.value.leaveId=this.data?.leave?.leaveId;
-            this.leaveForm.value.leaveForTheMonth = this.previousMonth;
-            this.leaveForm.value.employeeId =this.leaveForm.value.employeeId;
-            this.leaveForm.value.noOfDays=this.leaveForm.value.noOfDays;
 
-
-            this.leaveService.updateLeave(this.leaveForm.value).pipe(
-              catchError(error => {
-                console.error('Error updating leave:', error);
-                this.snackBar.open('Failed to update leave. Try again.', 'Close',  { duration: 5000 });
-                return throwError(error);
-              })
-            ).subscribe(() => {
-              this.dialogRef.close(true);
-            });
-          } else {
-            // Create Leave
-            this.leaveService.addLeave(this.leaveForm.value).pipe(
-              catchError(error => {
-                console.error('Error adding leave:', error);
-                this.snackBar.open('Failed to add leave. Try again.', 'Close', { duration: 5000 });
-                return throwError(error);
-              })
-            ).subscribe(() => {
-              this.dialogRef.close(true);
-            });
-          }
+          console.log("Check : ",this.leaveForm.value);
+          // Create Leave
+          this.leaveService.addLeave(this.leaveForm.value).pipe(
+            catchError(error => {
+              console.error('Error adding leave:', error);
+              this.snackBar.open('Failed to add leave. Try again.', 'Close', { duration: 5000 });
+              return throwError(error);
+            })
+          ).subscribe(() => {
+            this.dialogRef.close(true);
+          });
         }
+
+
+        // if (existingLeave ) {
+        //   this.snackBar.open('A leave record for this employee and month already exists. Please edit the existing record.', 'Close', {
+        //     duration: 5000
+        //   });
+        //   this.dialogRef.close(true);
+        // } else {
+
+        //   if (this.data?.leave?.leaveId) {
+        //     // Update Leave
+        //     this.leaveForm.value.leaveId=this.data?.leave?.leaveId;
+        //     this.leaveForm.value.leaveForTheMonth = this.previousMonth;
+        //     this.leaveForm.value.employeeId =this.leaveForm.value.employeeId;
+        //     this.leaveForm.value.noOfDays=this.leaveForm.value.noOfDays;
+
+        //     this.leaveService.updateLeave(this.leaveForm.value).pipe(
+        //       catchError(error => {
+        //         console.error('Error updating leave:', error);
+        //         this.snackBar.open('Failed to update leave. Try again.', 'Close',  { duration: 5000 });
+        //         return throwError(error);
+        //       })
+        //     ).subscribe(() => {
+        //       this.dialogRef.close(true);
+        //     });
+        //   } else {
+
+        //     console.log("Check : ",this.leaveForm.value);
+        //     // Create Leave
+        //     this.leaveService.addLeave(this.leaveForm.value).pipe(
+        //       catchError(error => {
+        //         console.error('Error adding leave:', error);
+        //         this.snackBar.open('Failed to add leave. Try again.', 'Close', { duration: 5000 });
+        //         return throwError(error);
+        //       })
+        //     ).subscribe(() => {
+        //       this.dialogRef.close(true);
+        //     });
+        //   }
+        // }
       }
     }
 

@@ -12,6 +12,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
   templateUrl: './leave.component.html',
   styleUrls: ['./leave.component.css']
 })
+
 export class LeaveComponent implements OnInit {
   months: string[] = [];
   leaveForTheMonthControl = new FormControl('');
@@ -65,9 +66,15 @@ export class LeaveComponent implements OnInit {
   }
   
   deleteLeave(id: number) {
+    const confirmation = confirm('Are you sure you want to delete this record?');
+    if (!confirmation) {
+      return; // Do nothing if the user cancels
+    }
+  
     this.leaveService.deleteLeave(id).subscribe({
       next: () => {
         this.loadLeaves();
+        alert('Leave record deleted successfully.');
       },
       error: (err) => {
         console.error('Error deleting leave:', err);
@@ -75,6 +82,20 @@ export class LeaveComponent implements OnInit {
       }
     });
   }
+  
+
+  // deleteLeave(id: number) {
+
+  //   // this.leaveService.deleteLeave(id).subscribe({
+  //   //   next: () => {
+  //   //     this.loadLeaves();
+  //   //   },
+  //   //   error: (err) => {
+  //   //     console.error('Error deleting leave:', err);
+  //   //     alert('Failed to delete leave. Please try again.');
+  //   //   }
+  //   // });
+  // }
   // leave.component.ts
 openLeaveForm() {
   const dialogRef = this.dialog.open(LeaveDialogComponent, {
